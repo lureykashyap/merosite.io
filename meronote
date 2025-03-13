@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मेरो नोटप्याड</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .menu-bar {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-bar h1 {
+            margin: 0;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .menu-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .menu-bar ul li {
+            margin-right: 15px;
+        }
+
+        .menu-bar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+        }
+
+        .menu-bar ul li a:hover {
+            background-color: #0056b3;
+            border-radius: 4px;
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- मेनु बार -->
+    <div class="menu-bar">
+        <h1>मेरो नोटप्याड</h1>
+        <ul>
+            <li><a href="#" data-page="home">गृह</a></li>
+            <li><a href="#" data-page="settings">सेटिङ</a></li>
+            <li><a href="#" data-page="help">मद्दत</a></li>
+        </ul>
+    </div>
+
+    <!-- पृष्ठहरू -->
+    <div id="home" class="page active">
+        <h1>मेरो नोटप्याड</h1>
+        <textarea id="note" placeholder="यहाँ नोट लेख्नुहोस्..."></textarea>
+    </div>
+
+    <div id="settings" class="page">
+        <h1>सेटिङहरू</h1>
+        <p>यहाँ सेटिङहरू सम्पादन गर्नुहोस्।</p>
+    </div>
+
+    <div id="help" class="page">
+        <h1>मद्दत</h1>
+        <p>यहाँ मद्दत र डकुमेन्टेशन हेर्नुहोस्।</p>
+    </div>
+
+    <script>
+        // पृष्ठहरू स्विच गर्ने कार्य
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+        }
+
+        // मेनु बारमा लिंकहरूमा इभेन्ट थप्नुहोस्
+        document.querySelectorAll('.menu-bar ul li a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                showPage(pageId);
+            });
+        });
+    </script>
+</body>
+</html>
